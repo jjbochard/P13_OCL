@@ -1,5 +1,8 @@
 build:
-	docker build -t ocl_image .
+	DOCKER_BUILDKIT=1 docker build -t ocl_local_django -f Dockerfile .
 
 django:
-	docker run -p 8000:8000 ocl_image
+	docker-compose -f docker-compose.yml up django
+
+test:
+	docker-compose -f docker-compose.yml run --rm django pytest -s
