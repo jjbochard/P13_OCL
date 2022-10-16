@@ -5,8 +5,8 @@ workflows:
     jobs:
       - test-and-lint
       - build-and-push
-        requires:
-          - test-and-lint
+          requires:
+            - test-and-lint
 
 jobs:
   test-and-lint:
