@@ -32,7 +32,7 @@ jobs:
           name: Running linting
           command: |
             . venv/bin/activate
-            pythom -m flake8
+            python -m flake8
 
   build-and-push:
     docker:
