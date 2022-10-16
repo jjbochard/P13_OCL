@@ -1,8 +1,13 @@
 version: '3'
 
 services:
-  web:
-    build: .
+  django:
+    build:
+      context: .
+      dockerfile: ./dockerfile
+    image: ocl_local_django
+    container_name: ocl_django
+
     volumes:
       - .:/ocl
     ports:
