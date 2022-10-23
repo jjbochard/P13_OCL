@@ -60,10 +60,5 @@ jobs:
     steps:
       - checkout
       - heroku/install
-      - run:
-          name: Deploy image on heroku
-          command:  |
-            docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
-            docker pull $USERNAME/ocl:$CIRCLE_SHA1
-            docker tag $USERNAME/ocl:$CIRCLE_SHA1 registry.heroku.com/testocl/web
-            docker push registry.heroku.com/testocl/web
+      - heroku/deploy-via-git:
+          app-name: testocl
