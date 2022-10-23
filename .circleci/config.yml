@@ -63,6 +63,6 @@ jobs:
       - run:
           name: Deploy image on heroku
           command:  |
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a --app ocltest web
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a --app ocltest web
+            docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
+            docker tag $USERNAME/ocl:$CIRCLE_SHA1 registry.heroku.com/ocltest/web
+            docker push registry.heroku.com/ocltest/web
