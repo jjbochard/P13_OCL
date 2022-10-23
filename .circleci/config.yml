@@ -65,5 +65,5 @@ jobs:
           command:  |
             docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
             docker pull $USERNAME/ocl:$CIRCLE_SHA1
-            docker tag $USERNAME/ocl:$CIRCLE_SHA1 registry.heroku.com/ocltest/web
-            docker push registry.heroku.com/ocltest/web
+            docker tag $USERNAME/ocl:$CIRCLE_SHA1 registry.heroku.com/testocl/web
+            docker push registry.heroku.com/testocl/web
