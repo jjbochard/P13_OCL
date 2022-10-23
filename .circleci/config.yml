@@ -56,14 +56,11 @@ jobs:
             docker push $USERNAME/ocl:$CIRCLE_SHA1
 
   deploy-on-heroku:
-    machine: true
+    executor: heroku/default
     steps:
       - checkout
-      - run:
-          name: Deploy image on heroku
-          command:  |
-              sudo curl https://cli-assets.heroku.com/install.sh | sh
-              HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
-              docker tag $USERNAME/ocl:$CIRCLE_SHA1 registry.heroku.com/testocl/web
-              docker push registry.heroku.com/ocltest/web
-              HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release web
+      - heroku/install
+      - heroku/push-docker-image
+          app-name: $APP_NAME
+          force: true
+      - run: heroku ps:scale web=1 -1 $APP_NAME
