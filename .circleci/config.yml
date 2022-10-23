@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   python: circleci/python@2.1.1
+  heroku: circleci/heroku@2.0.0
 
 workflows:
   test-and-deploy:
@@ -10,6 +11,9 @@ workflows:
       - build-and-push:
           requires:
             - test-and-lint
+      - deploy-on-heroku:
+          requires:
+            - build-and-push
 
 jobs:
   test-and-lint:
@@ -50,3 +54,15 @@ jobs:
             docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
             docker tag ocl:latest $USERNAME/ocl:$CIRCLE_SHA1
             docker push $USERNAME/ocl:$CIRCLE_SHA1
+
+  deploy-on-heroku:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - run:
+          name: Deploy image on heroku
+          command:  |
+            heroku container:login
+            heroku container:push -a ${APP_NAME} web
+            heroku container:release -a ${APP_NAME} web
