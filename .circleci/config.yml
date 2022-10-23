@@ -62,5 +62,4 @@ jobs:
       - heroku/install
       - heroku/push-docker-image:
           app-name: $APP_NAME
-          force: true
       - run: heroku ps:scale web=1 -1 $APP_NAME
