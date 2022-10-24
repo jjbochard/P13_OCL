@@ -11,7 +11,7 @@ workflows:
       - build-and-push:
           requires:
             - test-and-lint
-      - hero/deploy-via-git:
+      - heroku/deploy-via-git:
           requires:
             - build-and-push
           filters:
