@@ -56,9 +56,9 @@ jobs:
             docker push $USERNAME/ocl:$CIRCLE_SHA1
 
   deploy-on-heroku:
-    executor: heroku/default
     steps:
       - checkout
       - heroku/install
       - heroku/deploy-via-git:
           app-name: testocl
+          api-key: HEROKU_API_KEY
