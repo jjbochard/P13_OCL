@@ -11,9 +11,12 @@ workflows:
       - build-and-push:
           requires:
             - test-and-lint
-      - deploy-on-heroku:
+      - hero/deploy-via-git:
           requires:
             - build-and-push
+          filters:
+            branches:
+              - only: circleci-project-setup
 
 jobs:
   test-and-lint:
@@ -54,11 +57,3 @@ jobs:
             docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
             docker tag ocl:latest $USERNAME/ocl:$CIRCLE_SHA1
             docker push $USERNAME/ocl:$CIRCLE_SHA1
-  deploy-on-heroku:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - heroku/install
-      - heroku/deploy-via-git:
-          app-name: HEROKU_APP_NAME
-          api-key: HEROKU_API_KEY
