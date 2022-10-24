@@ -14,9 +14,6 @@ workflows:
       - heroku/deploy-via-git:
           requires:
             - build-and-push
-          filters:
-            branches:
-              - only: circleci-project-setup
 
 jobs:
   test-and-lint:
