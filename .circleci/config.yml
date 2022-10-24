@@ -55,7 +55,8 @@ jobs:
             docker tag ocl:latest $USERNAME/ocl:$CIRCLE_SHA1
             docker push $USERNAME/ocl:$CIRCLE_SHA1
   deploy-on-heroku:
-    executor: heroku/default
+    docker:
+      - image: cimg/base:stable
     steps:
       - heroku/install
       - heroku/deploy-via-git:
