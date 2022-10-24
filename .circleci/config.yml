@@ -56,10 +56,14 @@ jobs:
             docker tag ocl:latest $USERNAME/ocl:$CIRCLE_SHA1
             docker push $USERNAME/ocl:$CIRCLE_SHA1
   deploy-on-heroku:
-    docker:
-      - image: cimg/base:stable
+    executor: heroku/default
     steps:
+      - checkout
       - heroku/install
-      - heroku/deploy-via-git:
-          app-name: HEROKU_APP_NAME
-          api-key: HEROKU_API_KEY
+      - setup_remote_docker
+      - run:
+          name: Push to heroku
+          command:  |
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a ${HEROKU_APP_NAME} web
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a ${HEROKU_APP_NAME} web
