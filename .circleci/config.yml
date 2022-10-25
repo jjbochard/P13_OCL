@@ -66,5 +66,5 @@ jobs:
           command:  |
             sudo curl https://cli-assets.heroku.com/install.sh | sh
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a ${HEROKU_APP_NAME} web --recursive
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push --recursive -a ${HEROKU_APP_NAME} web
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a ${HEROKU_APP_NAME} web
