@@ -56,13 +56,12 @@ jobs:
             docker tag ocl:latest $USERNAME/ocl:$CIRCLE_SHA1
             docker push $USERNAME/ocl:$CIRCLE_SHA1
   deploy-on-heroku:
-    executor: heroku/default
+    machine: true
     steps:
       - checkout
-      - heroku/install
-      - setup_remote_docker
       - run:
-          HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set WEB_CONCURRENCY=3 -a ${HEROKU_APP_NAME}
+          name: Setup Heroku
+          command: curl https://cli-assets.heroku.com/install.sh | sh
       - run:
           name: Push to heroku
           command:  |
