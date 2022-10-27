@@ -118,7 +118,8 @@ STATIC_URL = "/static/"
 #     SENTRY_DSN = SENTRY_DSN_KEY
 
 sentry_sdk.init(
-    dsn="https://5930475a11434921a8078c0ce721697c@o4504057573867520.ingest.sentry.io/4504057837256704",
+    dsn="https://5930475a11434921a8078c0ce721697c@o4504057573867520.ingest.\
+        sentry.io/4504057837256704",
     integrations=[
         DjangoIntegration(),
     ])
