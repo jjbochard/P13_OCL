@@ -14,3 +14,7 @@ Praesent volutpat porttitor magna, non finibus neque cursus id.
 
 def index(request):
     return render(request, "oc_lettings_site/index.html")
+
+
+def trigger_error(request):
+    return 1 / 0
