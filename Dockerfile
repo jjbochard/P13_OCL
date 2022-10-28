@@ -1,21 +1,24 @@
-# Choose official python image
-FROM python:3.9-slim-buster
+# syntax=docker/dockerfile:1
 
-ENV PYTHONUNBUFFERED=1
+# Pull official base image
+FROM python:3.10
 
-# Set working directory
+# Set the WORKDIR
 WORKDIR /ocl
+ENV PORT=8000
 
-# Copy the app in WORKDIR
+COPY requirements.txt /code/
+
+# Upgrade pip and install requirements 
+RUN pip install --upgrade pip \ 
+    && pip install -r requirements.txt
+EXPOSE 8000
+
+# Copy project 
 COPY . /ocl/
 
-# Install requirements
-RUN pip install -r requirements.txt
-# RUN python manage.py migrate
-# Expose port 80 to be accessible
-EXPOSE 8080
+# Collect static files
+RUN python manage.py collectstatic
 
-# CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
-
-# 
-CMD ["gunicorn" , "--bind" , "0.0.0.0:8080", "oc_lettings_site.wsgi"]
+# Run the application
+CMD gunicorn oc_lettings_site.wsgi -b 0.0.0.0:$PORT
