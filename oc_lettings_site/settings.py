@@ -1,6 +1,7 @@
 import os
 
 import sentry_sdk
+from decouple import config
 from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -10,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(os.environ.get('DJANGO_SECRET_KEY'))
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -113,13 +114,8 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-# SENTRY_DSN_KEY = None
-# if os.environ.get('SENTRY_DSN_KEY'):
-#     SENTRY_DSN = SENTRY_DSN_KEY
-
 sentry_sdk.init(
-    dsn="https://5930475a11434921a8078c0ce721697c@o4504057573867520.ingest.\
-        sentry.io/4504057837256704",
+    dsn=config("SENTRY_DSN_KEY"),
     integrations=[
         DjangoIntegration(),
     ])
