@@ -2,7 +2,9 @@
 FROM python:3.9
 
 # setup env vars
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED=1
+ENV PORT 8000
 
 # Set working directory
 WORKDIR /ocl
@@ -15,7 +17,6 @@ RUN pip install -r requirements.txt
 
 # Allow port
 EXPOSE 8000
-ENV PORT 8000
 
 # Run server localy
-CMD python manage.py runserver 0.0.0.0:$PORT
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
