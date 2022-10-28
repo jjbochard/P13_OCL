@@ -1,24 +1,21 @@
-# syntax=docker/dockerfile:1
+# Choose official python image
+FROM python:3.9
 
-# Pull official base image
-FROM python:3.10
+# setup env vars
+ENV PYTHONUNBUFFERED=1
 
-# Set the WORKDIR
+# Set working directory
 WORKDIR /ocl
-ENV PORT=8000
 
-COPY requirements.txt /code/
-
-# Upgrade pip and install requirements 
-RUN pip install --upgrade pip \ 
-    && pip install -r requirements.txt
-EXPOSE 8000
-
-# Copy project 
+# Copy the app in WORKDIR
 COPY . /ocl/
 
-# Collect static files
-RUN python manage.py collectstatic
+# Install requirements
+RUN pip install -r requirements.txt
 
-# Run the application
-CMD gunicorn oc_lettings_site.wsgi -b 0.0.0.0:$PORT
+# Allow port
+EXPOSE 8000
+ENV PORT 8000
+
+# Run server localy
+CMD python manage.py runserver 0.0.0.0:$PORT
