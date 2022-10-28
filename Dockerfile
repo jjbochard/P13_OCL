@@ -13,6 +13,9 @@ COPY . /ocl/
 RUN pip install -r requirements.txt
 RUN python manage.py migrate
 # Expose port 80 to be accessible
-EXPOSE 8000
+EXPOSE 8080
 
-CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
+# CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
+
+# 
+CMD ["gunicorn" , "--bind" , "0.0.0.0:8080", "oc_lettings_site.wsgi"]
