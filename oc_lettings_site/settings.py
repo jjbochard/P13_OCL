@@ -115,7 +115,8 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 sentry_sdk.init(
-    dsn=config("SENTRY_DSN_KEY"),
+    dsn=config("SENTRY_DSN_KEY", default="bar"),
     integrations=[
         DjangoIntegration(),
-    ])
+    ],
+)
