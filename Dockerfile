@@ -1,10 +1,8 @@
 # Choose official python image
-FROM python:3.9
+FROM python:3.9-slim-buster
 
 # setup env vars
-ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED=1
-ENV PORT 8000
 
 # Set working directory
 WORKDIR /ocl
@@ -14,6 +12,7 @@ COPY . /ocl/
 
 # Install requirements
 RUN pip install -r requirements.txt
+RUN python manage.py migrate
 
 # Allow port
 EXPOSE 8000
