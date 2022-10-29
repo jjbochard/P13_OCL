@@ -17,4 +17,4 @@ RUN pip install -r requirements.txt
 EXPOSE 8000
 
 # Run server localy
-CMD gunicorn oc_lettings_ste.wsgi:application --bind 0.0.0.0:$PORT
+CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
