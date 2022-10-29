@@ -12,7 +12,6 @@ COPY . /ocl/
 
 # Install requirements
 RUN pip install -r requirements.txt
-RUN python manage.py migrate
 
 # Allow port
 EXPOSE 8000
