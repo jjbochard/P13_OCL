@@ -66,5 +66,7 @@ jobs:
           name: Push to heroku
           command:  |
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
+            heroku config:set DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY} -a ${HEROKU_APP_NAME}
+            heroku config:set SENTRY_DSN_KEY=${SENTRY_DSN_KEY} -a ${HEROKU_APP_NAME}
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a ${HEROKU_APP_NAME} web
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a ${HEROKU_APP_NAME} web
