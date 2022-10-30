@@ -11,9 +11,15 @@ workflows:
       - build-and-push:
           requires:
             - test-and-lint
+          filters:
+            branches:
+              only: master
       - deploy-on-heroku:
           requires:
             - build-and-push
+          filters:
+              branches:
+                only: master
 
 
 jobs:
