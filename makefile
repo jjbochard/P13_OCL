@@ -5,8 +5,8 @@ local:
 	docker run -t -i -p 8000:8000 ocl_local_django
 
 hub:
-	docker pull jeremy.bochard/ocl
-	docker run -t -i -p 8000:8000 jeremybochard/ocl
-	
+	docker pull jeremybochard/ocl
+	docker run env-file .env -t -i -p 8000:8000 jeremybochard/ocl 
+
 test:
 	docker run -t -i -p 8000:8000 ocl_local_django pytest
