@@ -1,8 +1,12 @@
-build:
-	DOCKER_BUILDKIT=1 docker build -t ocl_local_django -f Dockerfile .
+build-local:
+	DOCKER_BUILDKIT=1 docker build -t ocl_local_django -f Docker/local/django/Dockerfile .
 
-django:
-	docker-compose -f docker-compose.yml up django
+local:
+	docker run -t -i -p 8000:8000 ocl_local_django
 
+hub:
+	docker pull jeremy.bochard/ocl
+	docker run -t -i -p 8000:8000 jeremybochard/ocl
+	
 test:
-	docker-compose -f docker-compose.yml run --rm django pytest -s
+	docker run -t -i -p 8000:8000 ocl_local_django pytest
