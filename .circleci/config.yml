@@ -48,7 +48,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: Build Docker image
-          command: docker build -t ocl .
+          command: docker build -t ocl:$CIRCLE_SHA1 .
       - run:
           name: Push Docker image
           command:  |
