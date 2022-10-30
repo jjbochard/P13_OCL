@@ -53,7 +53,7 @@ jobs:
           name: Push Docker image
           command:  |
             docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
-            docker tag $DOCKER_USER/ocl:$CIRCLE_SHA1 $DOCKER_USER/ocl:latest
+            docker tag ocl:$CIRCLE_SHA1 ocl:latest
             docker push $DOCKER_USER/ocl:$CIRCLE_SHA1
             docker push $DOCKER_USER/ocl:$latest
 
