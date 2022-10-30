@@ -53,8 +53,10 @@ jobs:
           name: Push Docker image
           command:  |
             docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
-            docker tag ocl:latest $USERNAME/ocl:$CIRCLE_SHA1
-            docker push $USERNAME/ocl:$CIRCLE_SHA1
+            docker tag $DOCKER_USER/ocl:$CIRCLE_SHA1 $DOCKER_USER/ocl:latest
+            docker push $DOCKER_USER/ocl:$CIRCLE_SHA1
+            docker push $DOCKER_USER/ocl:$latest
+
   deploy-on-heroku:
     machine: true
     steps:
