@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 
-import django_heroku
 import sentry_sdk
 from decouple import config
 from sentry_sdk.integrations.django import DjangoIntegration
@@ -124,5 +123,3 @@ sentry_sdk.init(
         DjangoIntegration(),
     ],
 )
-
-django_heroku.settings(locals())
