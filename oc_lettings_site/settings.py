@@ -1,8 +1,11 @@
 import os
+from pathlib import Path
 
 import sentry_sdk
 from decouple import config
 from sentry_sdk.integrations.django import DjangoIntegration
+
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -15,8 +18,7 @@ SECRET_KEY = config("DJANGO_SECRET_KEY", default="foo")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(config("DEBUG_KEY", default=False))
-print(DEBUG)
-print(SECRET_KEY)
+
 ALLOWED_HOSTS = ["0.0.0.0", "localhost", "ocl0987.herokuapp.com", "127.0.0.1"]
 
 
@@ -114,7 +116,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
-
+STATIC_ROOT = str(ROOT_DIR / "staticfiles")
 sentry_sdk.init(
     dsn=config("SENTRY_DSN_KEY", default="bar"),
     integrations=[
