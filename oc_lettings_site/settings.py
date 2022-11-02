@@ -6,7 +6,7 @@ from decouple import config
 from sentry_sdk.integrations.django import DjangoIntegration
 
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
-
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -115,11 +115,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT = str(BASE_DIR / "staticfiles")
-STATIC_URL = "static/"
-
-# Enable WhiteNoise's GZip compression of static assets.
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(ROOT_DIR, 'staticfiles')
 
 sentry_sdk.init(
     dsn=config("SENTRY_DSN_KEY", default="bar"),
