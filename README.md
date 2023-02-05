@@ -115,3 +115,23 @@ Sentry a été configuré pour pouvoir monitorer l'application et de suivre les 
     - HEROKU_APP_NAME
     - DJANGO_SECRET_KEY
     - SENTRY_DSN_KEY
+10. Créer une application sur heroku
+    ````
+    heroku create -a $APPNAME
+    ````
+11. Déployer votre code
+    ````
+    heroku push heroku main
+    ````
+12. Vérifier qu'une instance de l'application tourne
+    ````
+    heroku ps:scale web=1 -a $APPNAME
+    ````
+13. Ouvrir votre application
+    ````
+    heroku open -a $APPNAME
+    ````
+
+### Lien de l'application pour le passage du jury
+
+https://ocl0987.herokuapp.com/
